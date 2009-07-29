@@ -1,0 +1,7 @@
+.*.sw?
+db/*.sqlite3
+log/*.log
+Capfile
+config/database.yml
+config/session.yml
+tmp/*

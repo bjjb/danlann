@@ -1,0 +1,7 @@
+# An example secret session key file. You should copy this to
+# config/session.yml, run the task
+#     rake secret
+# and replace the value for "key" below with what the Rake task prints out.
+# Replace "myapp" with the name of your application.
+session_key: myapp_session
+key: af52c84f88b6507d0795da791a738a3daf192c1a68caaf361d7ed2423f9b52faa2bb0fd0f2cac9806d016d4874e3d3b8438f13c5632ebd9a2d3ff5745d035f50
