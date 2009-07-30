@@ -1,0 +1,7 @@
+# app/views/pictures/show.ong.flexi
+# Accessed via http://mysite.com/pictures/png.jpg
+@picture.operate do |picture|
+  picture.resize '200x200'
+  picture.polaroid
+end
+# vi:ft=ruby:tw=78:ts=2:sw=2

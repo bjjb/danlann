@@ -17,4 +17,11 @@ Rails::Initializer.run do |config|
   if File.exists?(f = File.join(Rails.root, "config", "session.yml"))
     config.action_controller.session = YAML.load(File.read(f))
   end
+
+  config.after_initialize do
+    ActionView::Base.default_form_builder = LabeledFormBuilder
+    %w(polaroid).each do |effect|
+      require "lib/#{effect}"
+    end
+  end
 end

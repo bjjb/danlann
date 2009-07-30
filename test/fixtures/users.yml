@@ -1,15 +1,13 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  email: MyString
-  crypted_password: 
+bill:
+  email: "bill@example.com"
+  crypted_password: MyString
   password_salt: MyString
   persistence_token: MyString
   single_access_token: MyString
 
-two:
-  email: MyString
-  crypted_password: 
+david:
+  email: "david@example.com"
+  crypted_password: MyString 
   password_salt: MyString
   persistence_token: MyString
   single_access_token: MyString

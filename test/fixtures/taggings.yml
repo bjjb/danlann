@@ -1,0 +1,7 @@
+travel_on_eifel_tower:
+  tag: travel
+  picture: eifel_tower
+
+architecture_on_eifel_tower:
+  tag: architecture
+  picture: eifel_tower

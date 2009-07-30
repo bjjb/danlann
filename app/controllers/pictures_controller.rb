@@ -1,6 +1,7 @@
 class PicturesController < ApplicationController
+  caches_page :show
+
   # GET /pictures
-  # GET /pictures.xml
   def index
     @pictures = Picture.all
 
@@ -11,8 +12,18 @@ class PicturesController < ApplicationController
   end
 
   # GET /pictures/1
-  # GET /pictures/1.xml
   def show
+    @picture = Picture.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.jpg
+      format.png
+      format.xml  { render :xml => @picture }
+    end
+  end
+
+  # GET /pictures/1/thumb
+  def thumb
     @picture = Picture.find(params[:id])
 
     respond_to do |format|
@@ -20,9 +31,7 @@ class PicturesController < ApplicationController
       format.xml  { render :xml => @picture }
     end
   end
-
   # GET /pictures/new
-  # GET /pictures/new.xml
   def new
     @picture = Picture.new
 
@@ -38,7 +47,6 @@ class PicturesController < ApplicationController
   end
 
   # POST /pictures
-  # POST /pictures.xml
   def create
     @picture = Picture.new(params[:picture])
 
@@ -55,7 +63,6 @@ class PicturesController < ApplicationController
   end
 
   # PUT /pictures/1
-  # PUT /pictures/1.xml
   def update
     @picture = Picture.find(params[:id])
 
@@ -72,7 +79,6 @@ class PicturesController < ApplicationController
   end
 
   # DELETE /pictures/1
-  # DELETE /pictures/1.xml
   def destroy
     @picture = Picture.find(params[:id])
     @picture.destroy
