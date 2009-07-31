@@ -1,8 +1,17 @@
 travel:
-  name: Travel
+  name: travel
 
-architecture:
-  name: Architecture
+paris:
+  name: paris
 
-nature:
-  name: Nature
+mexico:
+  name: mexico
+
+pets:
+  name: pets
+
+cats:
+  name: cats
+
+dogs:
+  name: dogs

@@ -1,0 +1,8 @@
+<% title "Login" %>
+
+<% form_for @user_session do |f| %>
+  <%= f.error_messages %>
+  <%= f.text_field :email %>
+  <%= f.password_field :password %>
+  <%= f.submit "Log In" %>
+<% end %>

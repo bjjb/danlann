@@ -2,30 +2,10 @@
 
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
-
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :crypted_password %><br />
-    <%= f.text_field :crypted_password %>
-  </p>
-  <p>
-    <%= f.label :password_salt %><br />
-    <%= f.text_field :password_salt %>
-  </p>
-  <p>
-    <%= f.label :persistence_token %><br />
-    <%= f.text_field :persistence_token %>
-  </p>
-  <p>
-    <%= f.label :single_access_token %><br />
-    <%= f.text_field :single_access_token %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+  <%= f.text_field :email %>
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.submit 'Update' %>
 <% end %>
 
 <%= link_to 'Show', @user %> |

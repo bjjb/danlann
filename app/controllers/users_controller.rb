@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :admin_only, :only => :index
+  before_filter :find_user, :except => [:index, :new]
+
   # GET /users
   # GET /users.xml
   def index
@@ -34,7 +37,13 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = if params[:id].to_s == 'current'
+      current_user
+    elsif current_user.admin?
+      User.find(params[:id])
+    else
+
+    end
   end
 
   # POST /users
@@ -80,6 +89,18 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
+    end
+  end
+
+private
+  def find_user
+    @user = if params[:id] == 'current'
+      current_user
+    elsif current_user.admin?
+      User.find(params[:id])
+    else
+      render 401
+      false
     end
   end
 end

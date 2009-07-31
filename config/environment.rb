@@ -20,8 +20,5 @@ Rails::Initializer.run do |config|
 
   config.after_initialize do
     ActionView::Base.default_form_builder = LabeledFormBuilder
-    %w(polaroid).each do |effect|
-      require "lib/#{effect}"
-    end
   end
 end

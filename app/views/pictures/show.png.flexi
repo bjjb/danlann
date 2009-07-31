@@ -1,7 +1,7 @@
-# app/views/pictures/show.ong.flexi
-# Accessed via http://mysite.com/pictures/png.jpg
+# app/views/pictures/show.png.flexi
+# Accessed via http://mysite.com/pictures/png.png
 @picture.operate do |picture|
   picture.resize '200x200'
-  picture.polaroid
+  picture.polaroid(:caption => @picture.name)
 end
 # vi:ft=ruby:tw=78:ts=2:sw=2

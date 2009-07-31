@@ -1,10 +1,13 @@
 class PicturesController < ApplicationController
-  caches_page :show
+
+  caches_page :show, :index
 
   # GET /pictures
   def index
-    @pictures = Picture.all
-
+    @pictures = scope.paginate(
+      :page => params[:page],
+      :per_page => params[:per_page]
+    )
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pictures }
@@ -22,15 +25,6 @@ class PicturesController < ApplicationController
     end
   end
 
-  # GET /pictures/1/thumb
-  def thumb
-    @picture = Picture.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @picture }
-    end
-  end
   # GET /pictures/new
   def new
     @picture = Picture.new
@@ -87,5 +81,16 @@ class PicturesController < ApplicationController
       format.html { redirect_to(pictures_url) }
       format.xml  { head :ok }
     end
+  end
+
+private
+  def scope
+    @user = User.find(params[:user_id]) if params[:user_id]
+    @tag = Tag.find(params[:tag_id]) if params[:tag_id]
+    scope = if @tag then @tag.pictures.scoped({}) else Picture end
+    if @user
+      scope = scope.scoped :conditions => { :user_id => @user.id }
+    end
+    scope
   end
 end

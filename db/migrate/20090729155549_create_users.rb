@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :openid_identifier
       t.timestamps
     end
+
   end
 
   def self.down
