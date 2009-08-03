@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     @role_names || roles.map { |r| r.name }.join(', ')
   end
 
+  def gravatar_url
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.strip.downcase)}.jpg"
+  end
+
   def assign_roles
     unless @role_names.blank?
       self.roles = @role_names.split(Tag.separator).map do |name|

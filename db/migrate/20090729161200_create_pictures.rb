@@ -7,7 +7,6 @@ class CreatePictures < ActiveRecord::Migration
       t.string :name, :null => false
       t.text :description
       t.belongs_to :user
-
       t.timestamps
     end
   end

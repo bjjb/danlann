@@ -6,4 +6,6 @@ class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
   fixtures :all
+
+  Picture.image_directory = "test/fixtures/data"
 end

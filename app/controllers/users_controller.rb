@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :admin_only, :only => :index
-  before_filter :find_user, :except => [:index, :new]
+  before_filter :hide_user_nav
 
   # GET /users
   # GET /users.xml
@@ -93,14 +93,7 @@ class UsersController < ApplicationController
   end
 
 private
-  def find_user
-    @user = if params[:id] == 'current'
-      current_user
-    elsif current_user.admin?
-      User.find(params[:id])
-    else
-      render 401
-      false
-    end
+  def hide_user_nav
+    @show_user_nav = false
   end
 end

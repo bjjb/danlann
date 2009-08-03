@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
 
-  caches_page :show, :index
+  caches_page :show
 
   # GET /pictures
   def index

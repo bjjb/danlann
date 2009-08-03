@@ -6,6 +6,11 @@ class Picture < ActiveRecord::Base
   attr_writer :tag_names
   after_save :apply_tags
 
+  class << self
+    attr_accessor_with_default :group_size, 6
+  end
+  attr_accessor_with_default :group_size, group_size
+
   acts_as_fleximage do
     image_directory 'db/uploaded'
   end
@@ -13,6 +18,8 @@ class Picture < ActiveRecord::Base
   def tag_names
     @tag_names || tags.map(&:name)
   end
+
+  named_scope :most_recent, { :limit => group_size, :order => 'created_at DESC' }
 
 private
   def apply_tags

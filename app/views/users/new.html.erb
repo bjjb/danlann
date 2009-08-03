@@ -2,11 +2,10 @@
 
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
-
-    <%= f.text_field :email %>
-    <%= f.password_field :password %>
-    <%= f.password_field :password_confirmation %>
-    <%= f.submit 'Create' %>
+  <%= f.text_field :email %>
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.submit 'Create' %>
 <% end %>
 
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', root_path %>

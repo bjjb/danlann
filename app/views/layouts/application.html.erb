@@ -8,7 +8,23 @@
     <title><%= h([yield(:title), 'Dánlann'].compact.join(" » ")) %></title>
   </head>
   <body>
-    <%= flash_messages -%>
-    <%= yield %>
+    <div class='content'>
+      <h1><%= yield(:title) %></h1>
+      <%= flash_messages -%>
+      <div class='main'>
+        <%= yield %>
+      </div>
+      <% if show_user_nav? %>
+      <ul class='user_nav'>
+        <% if current_user %>
+        <li><%= link_to 'My Account', edit_user_path(:current), :class => 'account' %></li>
+        <li><%= link_to 'Log Out', logout_path, :class => 'logout' %></li>
+        <% else %>
+        <li><%= link_to 'Register', new_user_path, :class => 'register' %></li>
+        <li><%= link_to 'Log In', login_path, :class => 'login' %></li>
+        <% end %>
+      </ul>
+      <% end %>
+    </div>
   </body>
 </html>
