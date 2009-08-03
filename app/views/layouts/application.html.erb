@@ -8,23 +8,42 @@
     <title><%= h([yield(:title), 'Dánlann'].compact.join(" » ")) %></title>
   </head>
   <body>
-    <div class='content'>
-      <h1><%= yield(:title) %></h1>
-      <%= flash_messages -%>
-      <div class='main'>
-        <%= yield %>
-      </div>
-      <% if show_user_nav? %>
-      <ul class='user_nav'>
-        <% if current_user %>
-        <li><%= link_to 'My Account', edit_user_path(:current), :class => 'account' %></li>
-        <li><%= link_to 'Log Out', logout_path, :class => 'logout' %></li>
-        <% else %>
-        <li><%= link_to 'Register', new_user_path, :class => 'register' %></li>
-        <li><%= link_to 'Log In', login_path, :class => 'login' %></li>
-        <% end %>
-      </ul>
+    <div class='page'>
+      <div class='header'>
+        <h1><%=h yield(:title) %></h1>
+        <%- form_tag({}, { :class => :search, :method => "get" }) do -%>
+          <%= text_field_tag :search %>
+          <%= submit_tag "Search" %>
+        <%- end -%>
+        <ul class='navigation'>
+          <li><%= link_to 'Pictures', pictures_path %></li>
+          <li><%= link_to 'Tags', tags_path %></li>
+          <li><%= link_to 'Users', users_path %></li>
+        </ul>
+
+        <% if show_user_nav? %>
+        <ul class='user_nav'>
+          <% if current_user %>
+          <li><%= link_to 'My Account', edit_user_path(:current), :class => 'account' %></li>
+          <li><%= link_to 'Log Out', logout_path, :class => 'logout' %></li>
+          <% else %>
+          <li><%= link_to 'Register', new_user_path, :class => 'register' %></li>
+          <li><%= link_to 'Log In', login_path, :class => 'login' %></li>
+          <% end %>
+        </ul>
       <% end %>
+      </div>
+
+      <div class='main'>
+        <div class='flash'>
+          <%- flash_messages.each do |type, message| -%>
+          <p class='<%=h type.to_s %>'><%=h message %></p>
+          <%- end -%>
+        </div>
+        <div class='content'>
+          <%= yield %>
+        </div>
+      </div>
     </div>
   </body>
 </html>
