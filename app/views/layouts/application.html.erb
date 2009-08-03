@@ -8,7 +8,30 @@
     <title><%= h([yield(:title), 'Dánlann'].compact.join(" » ")) %></title>
   </head>
   <body>
-    <%= flash_messages -%>
-    <%= yield %>
+    <div class='page'>
+      <div class='header'>
+        <h1><%=h yield(:title) %></h1>
+        <%- form_tag({}, { :class => :search, :method => "get" }) do -%>
+          <%= text_field_tag :search %>
+          <%= submit_tag "Search" %>
+        <%- end -%>
+        <ul class='navigation'>
+          <li><%= link_to 'Pictures', pictures_path %></li>
+          <li><%= link_to 'Tags', tags_path %></li>
+          <li><%= link_to 'Users', users_path %></li>
+        </ul>
+      </div>
+
+      <div class='main'>
+        <div class='flash'>
+          <%- flash_messages.each do |type, message| -%>
+          <p class='<%=h type.to_s %>'><%=h message %></p>
+          <%- end -%>
+        </div>
+        <div class='content'>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

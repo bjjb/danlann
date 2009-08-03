@@ -1,13 +1,12 @@
 class PicturesController < ApplicationController
 
-  caches_page :show, :index
+  caches_page :show
+
+  before_filter :search
 
   # GET /pictures
   def index
-    @pictures = scope.paginate(
-      :page => params[:page],
-      :per_page => params[:per_page]
-    )
+    @pictures = Picture.paginate(@conditions)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pictures }
@@ -84,13 +83,18 @@ class PicturesController < ApplicationController
   end
 
 private
-  def scope
-    @user = User.find(params[:user_id]) if params[:user_id]
-    @tag = Tag.find(params[:tag_id]) if params[:tag_id]
-    scope = if @tag then @tag.pictures.scoped({}) else Picture end
-    if @user
-      scope = scope.scoped :conditions => { :user_id => @user.id }
+  def search
+    @conditions = {}
+    if params[:search]
+      @conditions[:joins] = :tags
+      @conditions[:conditions] = [
+        'pictures.name LIKE ? OR ' +
+        'tags.name LIKE ? OR ' +
+        'pictures.image_filename LIKE ?',
+        "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%"
+      ]
     end
-    scope
+    @conditions[:page] = params[:page]
+    @conditions[:per_page] = params[:per_page]
   end
 end
