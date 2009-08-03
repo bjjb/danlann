@@ -1,11 +1,7 @@
 class PicturesController < ApplicationController
 
   caches_page :show
-<<<<<<< HEAD:app/controllers/pictures_controller.rb
-=======
-
   before_filter :search
->>>>>>> 91a604457e7d30ed24d2c612ac0e0035bb7900f5:app/controllers/pictures_controller.rb
 
   # GET /pictures
   def index
