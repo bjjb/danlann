@@ -1,6 +1,7 @@
 class PicturesController < ApplicationController
 
   caches_page :show
+  before_filter :authorize, :except => [:index, :show]
   before_filter :search
 
   # GET /pictures
@@ -40,11 +41,11 @@ class PicturesController < ApplicationController
 
   # POST /pictures
   def create
-    @picture = Picture.new(params[:picture])
+    @picture = current_user.pictures.new(params[:picture])
 
     respond_to do |format|
       if @picture.save
-        flash[:notice] = 'Picture was successfully created.'
+        flash[:notice] = "Your picture's been saved"
         format.html { redirect_to(@picture) }
         format.xml  { render :xml => @picture, :status => :created, :location => @picture }
       else

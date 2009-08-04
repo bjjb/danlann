@@ -12,6 +12,7 @@ Rails::Initializer.run do |config|
   config.gem  'mislav-will_paginate',
               :lib => 'will_paginate',
               :source => 'http://gems.github.com'
+  config.gem  'rdiscount'
 
   # Load your own config/session.yml - which should *not* be checked in!
   if File.exists?(f = File.join(Rails.root, "config", "session.yml"))

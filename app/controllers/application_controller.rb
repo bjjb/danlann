@@ -26,4 +26,10 @@ private
     end
   end
 
+  def authorize
+    unless current_user
+      flash[:notice] = "You must log in first"
+      redirect_to login_path
+    end
+  end
 end

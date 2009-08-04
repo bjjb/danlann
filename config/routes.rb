@@ -22,6 +22,12 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :user_sessions
+  # /login
+  map.login 'login', :controller => 'user_sessions', :action => 'new'
+  # /logout
+  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
+  # /register
+  map.register 'register', :controller => 'users', :action => 'new'
 
   # /stylesheets/123
   map.resources :stylesheets
@@ -29,11 +35,5 @@ ActionController::Routing::Routes.draw do |map|
   # /javascripts/123
   map.resources :javascripts
 
-  # /login
-  map.login 'login', :controller => 'user_sessions', :action => 'new'
-  # /logout
-  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
-
-  # /
   map.root :controller => 'welcome'
 end

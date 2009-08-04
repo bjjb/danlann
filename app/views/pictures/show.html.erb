@@ -1,8 +1,11 @@
-<h1><%= @picture.name %></h1>
+<% title @picture.name %>
+<% div_for @picture do %>
+  <%= image_tag picture_path(@picture, :format => :jpg), :class => 'picture' %>
+  <%= RDiscount.new(@picture.description).to_html %>
+<% end %>
+<h2>Tags</h2>
 <ul class='tags'>
   <% @picture.tags.each do |tag| %>
   <li><%= link_to(tag.name, tag) %>
   <% end %>
 </ul>
-<%= image_tag picture_path(@picture, :format => :jpg) %>
-<p class='description'><%= @picture.description %></p>

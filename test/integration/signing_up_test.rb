@@ -4,7 +4,20 @@ class SigningUpTest < ActionController::IntegrationTest
   fixtures :all
 
   test "a user signing up for the first time" do
-    get "/"
-    assert_select 'a.register'
+    https!
+    get "/register"
+    assert_response :success
+
+    post_via_redirect "/users",
+                      :email => "test@example.com",
+                      :password => "secret",
+                      :password_confirmation => "secret"
+    
+    assert_equal  "Thanks for signing up, test@example.com",
+                  flash[:notice]
+
+    assert_not_nil User.last.single_access_token
+
+    https!(false)
   end
 end

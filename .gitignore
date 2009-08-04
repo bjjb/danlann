@@ -1,5 +1,6 @@
 .*.sw?
 db/*.sqlite3
+db/uploaded
 log/*.log
 Capfile
 config/database.yml
