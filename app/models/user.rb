@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def gravatar_url
-    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.strip.downcase)}.jpg"
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.strip.downcase)}.jpg?s=40"
   end
 
   def assign_roles
