@@ -7,6 +7,6 @@
                   :blur => 8,
                   :opacity => 0.75,
                   :offset => '5x5'
-  picture.resize '640x480'
+  picture.resize '500x500'
 end
 # vi:ft=ruby:tw=78:ts=2:sw=2

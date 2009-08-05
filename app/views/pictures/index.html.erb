@@ -1,5 +1,10 @@
 <% title 'Pictures' %>
-<%- @pictures.each do |picture| -%>
-<%= render :partial => picture %>
-<%- end -%>
-<%= link_to 'New picture', new_picture_path %>
+<div class='pictures'>
+  <%- @pictures.each do |picture| -%>
+  <%= render :partial => picture %>
+  <%- end -%>
+</div>
+<div class='links'>
+  <%= link_to 'Upload a Picture', new_picture_path %>
+  <%= link_to 'Upload Lots of Pictures', new_batch_path %>
+</div>

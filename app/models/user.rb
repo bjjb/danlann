@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :pictures
+  has_many :batches
 
   has_many :taggings
   has_many :tags, :through => :taggings

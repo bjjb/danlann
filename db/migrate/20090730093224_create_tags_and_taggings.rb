@@ -9,7 +9,6 @@ class CreateTagsAndTaggings < ActiveRecord::Migration
     create_table :taggings, :force => true do |t|
       t.belongs_to :tag, :null => false
       t.belongs_to :picture, :null => false
-      t.belongs_to :user, :null => false
       t.timestamps
     end
     add_index :taggings, %w(tag_id picture_id), :unique => true

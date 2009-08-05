@@ -9,7 +9,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090731120220) do
+ActiveRecord::Schema.define(:version => 20090804185907) do
+
+  create_table "batch_memberships", :force => true do |t|
+    t.integer  "batch_id",                  :null => false
+    t.integer  "picture_id",                :null => false
+    t.integer  "position",   :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "batch_memberships", ["batch_id", "picture_id"], :name => "index_batch_memberships_on_batch_id_and_picture_id", :unique => true
+
+  create_table "batches", :force => true do |t|
+    t.string   "name",                                      :null => false
+    t.text     "description", :default => "No description", :null => false
+    t.integer  "user_id",                                   :null => false
+    t.string   "filename"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "batches", ["name", "user_id"], :name => "index_batches_on_name_and_user_id", :unique => true
 
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
@@ -54,7 +75,6 @@ ActiveRecord::Schema.define(:version => 20090731120220) do
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id",     :null => false
     t.integer  "picture_id", :null => false
-    t.integer  "user_id",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

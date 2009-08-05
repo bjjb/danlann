@@ -1,8 +1,8 @@
 class LabeledFormBuilder < ActionView::Helpers::FormBuilder
-  %w(text_field collection_select text_area password_field).each do |method|
+  %w(text_field collection_select text_area password_field file_field).each do |method|
     define_method(method) do |field_name, *args|
       paragraph_tag(method) do
-        label(field_name, *args) + "<br />" + super(field_name, *args)
+        label(field_name, *args) + super(field_name, *args)
       end
     end
   end
@@ -41,6 +41,6 @@ private
   end
 
   def paragraph_tag(field_name, &block)
-    @template.content_tag(:p, { :class => field_name }, &block)
+    @template.content_tag(:p, { :class => "form #{field_name}" }, &block)
   end
 end

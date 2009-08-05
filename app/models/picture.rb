@@ -1,5 +1,8 @@
 class Picture < ActiveRecord::Base
   belongs_to :user
+  
+  has_many :batch_memberships
+  has_many :batches, :through => :batch_memberships
 
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
