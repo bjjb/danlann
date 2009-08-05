@@ -1,10 +1,4 @@
 module ApplicationHelper
-  def flash_messages
-    flash.map do |type, message|
-      content_tag('p', :class => [:flash, type]) { message }
-    end.join
-  end
-
   def title(*args)
     if args.empty?
       h([yield(:title), self.title].compact.join(title_separator))
