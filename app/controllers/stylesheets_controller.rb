@@ -1,3 +1,0 @@
-class StylesheetsController < ApplicationController
-
-end
