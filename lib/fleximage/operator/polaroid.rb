@@ -7,6 +7,7 @@ class Fleximage::Operator::Polaroid < Fleximage::Operator::Base
     @image['Caption'] = options[:caption] if options.key?(:caption)
     options[:angle] ||= (-5..5).to_a.rand
     @image.polaroid(options[:angle]) do
+      self.shadow_color = options[:shadow_color] || 'white'
       self.gravity = Magick::CenterGravity
     end
   end

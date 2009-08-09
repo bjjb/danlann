@@ -90,12 +90,13 @@ ActiveRecord::Schema.define(:version => 20090804185907) do
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "email",               :null => false
-    t.string   "crypted_password",    :null => false
-    t.string   "password_salt",       :null => false
+    t.string   "email",                                  :null => false
+    t.string   "crypted_password",                       :null => false
+    t.string   "password_salt",                          :null => false
     t.string   "persistence_token"
     t.string   "single_access_token"
     t.string   "openid_identifier"
+    t.boolean  "administrator",       :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

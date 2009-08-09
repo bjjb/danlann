@@ -1,79 +1,63 @@
 travel_on_eifel_tower:
-  user: bob
   tag: travel
   picture: eifel_tower
 
 paris_on_eifel_tower:
-  user: bob
   tag: paris
   picture: eifel_tower
 
 travel_on_larc_de_triomphe:
-  user: bob
   tag: travel
   picture: larc_de_triomphe
 
 paris_on_larc_de_triomphe:
-  user: bob
   tag: paris
   picture: larc_de_triomphe
 
 travel_on_cockfighting:
-  user: cecil
   tag: travel
   picture: cockfighting
 
 mexico_on_cockfighting:
-  user: cecil
   tag: mexico
   picture: cockfighting
 
 travel_on_tequila:
-  user: cecil
   tag: travel
   picture: tequila
 
 mexico_on_tequila:
-  user: cecil
   tag: mexico
   picture: tequila
 
 pets_on_spot:
-  user: david
   tag: pets
   picture: spot
 
 dogs_on_spot:
-  user: david
   tag: dogs
   picture: spot
 
 pets_on_scruffy:
-  user: david
   tag: pets
   picture: scruffy
 
 dogs_on_scruffy:
-  user: david
   tag: dogs
   picture: scruffy
 
 pets_on_tabitha:
-  user: david
   tag: pets
   picture: tabitha
 
 cats_on_tabitha:
-  user: david
   tag: cats
   picture: tabitha
 
 pets_on_cleo:
-  user: david
   tag: pets
   picture: cleo
 
 cats_on_cleo:
-  user: david
   tag: cats
   picture: cleo

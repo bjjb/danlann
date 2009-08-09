@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :persistence_token
       t.string :single_access_token
       t.string :openid_identifier
+      t.boolean :administrator, :default => false
       t.timestamps
     end
   end

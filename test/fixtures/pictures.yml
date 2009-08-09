@@ -1,8 +1,8 @@
 larc_de_triomphe: 
   id: 2
+  user: bill
   created_at: 2009-01-01 11:00
   image_filename: larc_de_triomphe.jpg
-  user: bob
   name: The Arc de Triomphe
   description: >
     The Arc de Triomphe is a monument in Paris, France that
@@ -38,20 +38,20 @@ larc_de_triomphe:
   image_width: 200
 spot: 
   id: 5
+  user: david
   created_at: 2009-03-01 12:00
   image_filename: spot.jpg
   name: Spot
-  user: david
   description: >
     My dog spot is fetching a stick. Look how waggly his tail
     is. He's very fast.
   image_height: 200
   image_width: 200
-scruffy: 
+  
+scruffy:
   id: 6
   created_at: 2009-03-01 13:00
   image_filename: scruffy.jpg
-  user: david
   name: Scruffy In Repose
   description: >
     My dog scruffy is asleep on the carpet in front of the fire.
@@ -59,11 +59,12 @@ scruffy:
     only because he is very old.
   image_height: 200
   image_width: 200
+
 tabitha: 
   id: 7
+  user: david
   created_at: 2009-03-01 14:00
   image_filename: tabitha.jpg
-  user: david
   name: Tabitha
   image_height: 200
   image_width: 200
@@ -73,11 +74,12 @@ tabitha:
     like Tabitha my cat. LOL LOL LOL.
   image_height: 200
   image_width: 200
+
 cleo: 
   id: 8
+  user: david
   created_at: 2009-03-01 15:00
   image_filename: cleo.jpg
-  user: david
   name: Cleo the Cat
   description: >
     This is my cat Cleo. She is stuck up in a tree. She is very
@@ -87,22 +89,24 @@ cleo:
     I think she just likes being in the tree.
   image_height: 200
   image_width: 200
+
 tequila: 
   id: 4
+  user: david
   created_at: 2009-02-01 12:00
   image_filename: tequila.jpg
-  user: cecil
   name: Tequila!
   description: >
     Some mexican blokes and I slam Tequila in Cancun. Man, what
     a night.
   image_height: 200
   image_width: 200
+
 eifel_tower: 
   id: 1
+  user: bill
   created_at: 2009-01-01 12:00
   image_filename: eifel_tower.jpg
-  user: bob
   name: The Eifel Tower
   image_height: 200
   image_width: 200
@@ -125,10 +129,11 @@ eifel_tower:
     The Tour AXA will be taller still after renovation (225.11
     m, 738.36 ft), but it is not actually within Paris, being in
     the nearby suburb of La Défense.
+
 cockfighting: 
   id: 3
-  image_filename: cockfighting.jpg
   user: cecil
+  image_filename: cockfighting.jpg
   name: Cockfighting
   image_height: 200
   image_width: 200

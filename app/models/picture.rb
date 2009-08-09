@@ -1,13 +1,14 @@
 class Picture < ActiveRecord::Base
   belongs_to :user
   
-  has_many :batch_memberships
-  has_many :batches, :through => :batch_memberships
-
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
   attr_writer :tag_names
   after_save :apply_tags
+
+  validates_presence_of :user_id
+  validates_length_of :name, :within => 2..30
+  validates_length_of :description, :maximum => 10000
 
   class << self
     attr_accessor_with_default :group_size, 6
@@ -22,7 +23,7 @@ class Picture < ActiveRecord::Base
     @tag_names || tags.map(&:name)
   end
 
-  named_scope :most_recent, { :limit => group_size, :order => 'created_at DESC' }
+  named_scope :most_recent, lambda { { :limit => group_size, :order => 'created_at DESC' } }
 
 private
   def apply_tags

@@ -1,6 +1,8 @@
 class PicturesController < ApplicationController
-
   caches_page :show
+  cache_sweeper :picture_sweeper, :only => %w(update destroy)
+  cache_sweeper :tag_sweeper, :only => %w(create update destroy)
+
   before_filter :authorize, :except => [:index, :show]
   before_filter :search
 

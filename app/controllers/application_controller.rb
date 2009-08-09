@@ -19,16 +19,16 @@ private
     @current_user = current_user_session && current_user_session.record
   end
 
-  def admin_only
-    unless current_user.admin?
-      render 401
-      false
+  def authorize
+    unless current_user_session
+      flash[:message] = "You have to log in first"
+      redirect_to login_url
     end
   end
 
-  def authorize
-    unless current_user
-      flash[:notice] = "You must log in first"
+  def admin_only
+    unless current_user and current_user.admin?
+      flash[:notice] = "You must be an administrator to do that"
       redirect_to login_path
     end
   end

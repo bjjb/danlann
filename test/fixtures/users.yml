@@ -2,6 +2,12 @@ bill:
   email: "bill@example.com"
   crypted_password: ddf76cadc955f1b3fa399b2e1600aecb6a26f9f14940b8f88be130718d7eea920dbf21b4faeb432e4391564c1fbc845d9abad350af7502862142fe2f2105be97 # testtest
   password_salt: eEbnMz0hHvsFjNORK_cD
+  administrator: true
+
+cecil:
+  email: cecil@example.com
+  crypted_password: MyString
+  password_salt: MyString
 
 david:
   email: "david@example.com"

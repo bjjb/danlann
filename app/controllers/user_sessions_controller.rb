@@ -1,9 +1,16 @@
 class UserSessionsController < ApplicationController
+  def index
+    if current_user
+      redirect_to edit_user_path(current_user)
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
   def new
     @user_session = UserSession.new
   end
 
-  # TODO - proper error messages when login fails
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
