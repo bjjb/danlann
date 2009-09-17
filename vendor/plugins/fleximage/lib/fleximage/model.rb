@@ -571,7 +571,6 @@ module Fleximage
         
         # If any magic column names exists fill them with image meta data.
         def set_magic_attributes(file = nil)
-        debugger
           if file && self.respond_to?(:image_filename=)
             filename = file.original_filename if file.respond_to?(:original_filename)
             filename = file.basename          if file.respond_to?(:basename)
