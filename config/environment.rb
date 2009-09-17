@@ -12,7 +12,7 @@ Rails::Initializer.run do |config|
   config.gem  'mislav-will_paginate',
               :lib => 'will_paginate',
               :source => 'http://gems.github.com'
-  config.gem  'rdiscount'
+  config.gem  'bluecloth'
   config.gem  'rubyzip', :lib => 'zip/zipfilesystem'
 
   # Load your own config/session.yml - which should *not* be checked in!
