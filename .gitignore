@@ -6,3 +6,6 @@ Capfile
 config/database.yml
 config/session.yml
 tmp/*
+public/pictures
+public/tags
+public/index.html
