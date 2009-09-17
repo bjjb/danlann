@@ -6,6 +6,7 @@ class CreatePictures < ActiveRecord::Migration
       t.integer :image_height, :null => false
       t.string :name, :null => false
       t.text :description
+      t.boolean :public, :default => true
       t.belongs_to :user
       t.timestamps
     end

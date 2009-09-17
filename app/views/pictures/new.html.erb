@@ -1,10 +1,12 @@
 <% title "Upload" %>
 <% form_for @picture, :html => { :multipart => true } do |f| %>
+  <%= error_messages_for 'picture' %>
   <%= f.text_field :name %>
   <%= f.text_area :description, :rows => 10 %>
   <%= f.file_field :image_file, :label => 'Choose a File' %>
   <%= f.text_field :image_file_url, :label => 'or URL' %>
   <%= f.text_field :tag_names, :label => 'Tags' %>
+  <%= f.check_box :public, :label => 'Make this Picture Public' %>
   <%= f.submit "Create" %>
 <% end %>
 

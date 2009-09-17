@@ -1,2 +1,5 @@
 <% title "[#{@tag.name}]" %>
-<%= render @tag.pictures %>
+<%= will_paginate(@pictures) %>
+<div class='pictures'>
+  <%= render @pictures %>
+</div>

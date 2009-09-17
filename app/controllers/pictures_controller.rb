@@ -4,11 +4,10 @@ class PicturesController < ApplicationController
   cache_sweeper :tag_sweeper, :only => %w(create update destroy)
 
   before_filter :authorize, :except => [:index, :show]
-  before_filter :search
 
   # GET /pictures
   def index
-    @pictures = Picture.paginate(@conditions)
+    @pictures = Picture.viewable_by(current_user).paginate(:page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @pictures }
@@ -17,7 +16,7 @@ class PicturesController < ApplicationController
 
   # GET /pictures/1
   def show
-    @picture = Picture.find(params[:id])
+    @picture = Picture.viewable_by(current_user).find(params[:id])
     respond_to do |format|
       format.html
       format.jpg
@@ -28,7 +27,7 @@ class PicturesController < ApplicationController
 
   # GET /pictures/new
   def new
-    @picture = Picture.new
+    @picture = current_user.pictures.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,18 +37,18 @@ class PicturesController < ApplicationController
 
   # GET /pictures/1/edit
   def edit
-    @picture = Picture.find(params[:id])
+    @picture = current_user.pictures.find(params[:id])
   end
 
   # POST /pictures
   def create
     @picture = current_user.pictures.new(params[:picture])
-
+    return extract if zipfile?(params[:picture][:image_file])
     respond_to do |format|
       if @picture.save
         flash[:notice] = "Your picture's been saved"
         format.html { redirect_to(@picture) }
-        format.xml  { render :xml => @picture, :status => :created, :location => @picture }
+        format.xml  { head :ok }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
@@ -59,7 +58,7 @@ class PicturesController < ApplicationController
 
   # PUT /pictures/1
   def update
-    @picture = Picture.find(params[:id])
+    @picture = current_user.pictures.find(params[:id])
 
     respond_to do |format|
       if @picture.update_attributes(params[:picture])
@@ -75,7 +74,7 @@ class PicturesController < ApplicationController
 
   # DELETE /pictures/1
   def destroy
-    @picture = Picture.find(params[:id])
+    @picture = current_user.pictures.find(params[:id])
     @picture.destroy
 
     respond_to do |format|
@@ -85,18 +84,35 @@ class PicturesController < ApplicationController
   end
 
 private
-  def search
-    @conditions = {}
-    if params[:search]
-      @conditions[:joins] = :tags
-      @conditions[:conditions] = [
-        'pictures.name LIKE ? OR ' +
-        'tags.name LIKE ? OR ' +
-        'pictures.image_filename LIKE ?',
-        "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%"
-      ]
+  def zipfile?(file)
+    Zip::ZipFile.open(file.path) { |zipfile| }
+    true
+  rescue
+    false
+  end
+
+  def extract
+    attrs = params[:picture].clone
+    zipfile = params[:picture].delete(:image_file).path
+    count = 1
+    Zip::ZipFile.foreach(zipfile) do |entry|
+      file = "#{zipfile}-#{entry.name}"
+      entry.extract(file)
+      attrs[:name] = "#{params[:picture][:name]}-#{count}"
+      logger.debug "X [#{zipfile}] #{entry} => #{attrs[:name]}"
+      File.open(file) do |image_file|
+        attrs[:image_file] = image_file
+        picture = current_user.pictures.new(attrs)
+        picture.image_filename = entry.name
+        picture.save!
+      end
+      File.delete(file)
+      count += 1
     end
-    @conditions[:page] = params[:page]
-    @conditions[:per_page] = params[:per_page]
+    logger.debug "Extracted #{zipfile}"
+    respond_to do |format|
+      format.html { redirect_to pictures_path }
+      format.xml { head :ok }
+    end
   end
 end

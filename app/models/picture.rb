@@ -15,6 +15,9 @@ class Picture < ActiveRecord::Base
   end
   attr_accessor_with_default :group_size, group_size
 
+  cattr_accessor :per_page
+  @@per_page = 12
+
   acts_as_fleximage do
     image_directory 'db/uploaded'
   end
@@ -25,7 +28,18 @@ class Picture < ActiveRecord::Base
 
   named_scope :most_recent, lambda { { :limit => group_size, :order => 'created_at DESC' } }
 
+  named_scope :public, { :conditions => { :public => true } }
+  named_scope :viewable_by, lambda { |user| { :conditions => 
+      case user
+        when Integer then ['public=? OR user_id=?', true, user]
+        when User then ['public=? OR user_id=?', true, user.id]
+        else { :public => true }
+      end
+    }
+  }
+
 private
+
   def apply_tags
     unless @tag_names.blank?
       self.tags = @tag_names.split(Tag.separator).map do |name|

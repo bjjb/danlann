@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :zipfiles
   map.resources :pictures
   map.resources :batches
   map.resources :tags

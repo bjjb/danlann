@@ -8,6 +8,7 @@ body {
 
 a {
   color: #aaa;
+  outline: none;
 }
 
 a:hover {
@@ -16,6 +17,7 @@ a:hover {
 
 a:active {
   border: none;
+  outline: none;
 }
 div.page {
   color: #eee;
@@ -97,6 +99,22 @@ div.content>div.links>a {
 a, a>img {
   text-decoration: none;
   border: none;
+}
+
+input, textarea {
+  font-family: sans-serif;
+  font-size: 100%;
+  border: 1px solid #444;
+  background-color: #ddd;
+}
+input[type=text], textarea {
+  width: 20em;
+}
+input:hover, textarea:hover {
+  background-color: #eee;
+}
+input:focus, textarea:focus {
+  background-color: #fff;
 }
 /*
 * vi:ft=css:tw=79:ts=2:sw=2

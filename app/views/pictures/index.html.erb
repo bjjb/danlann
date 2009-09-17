@@ -1,5 +1,6 @@
 <% title 'Pictures' %>
 <div class='pictures'>
+  <%= will_paginate(@pictures) %>
   <%- @pictures.each do |picture| -%>
   <%= render :partial => picture %>
   <%- end -%>

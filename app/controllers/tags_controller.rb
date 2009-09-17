@@ -1,5 +1,4 @@
 class TagsController < ApplicationController
-  caches_page :index, :show
   cache_sweeper :tag_sweeper, :only => %w(update destroy)
 
   # GET /tags
@@ -16,7 +15,8 @@ class TagsController < ApplicationController
   # GET /tags/1
   # GET /tags/1.xml
   def show
-    @tag = Tag.find(params[:id], :include => :pictures)
+    @tag = Tag.find(params[:id])
+    @pictures = @tag.pictures.viewable_by(current_user).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # show.html.erb
