@@ -43,12 +43,17 @@ class PicturesController < ApplicationController
   # POST /pictures
   def create
     @picture = current_user.pictures.new(params[:picture])
-    return extract if zipfile?(params[:picture][:image_file])
     respond_to do |format|
       if @picture.save
-        flash[:notice] = "Your picture's been saved"
+        flash[:notice] = "Your picture has been saved"
         format.html { redirect_to(@picture) }
         format.xml  { head :ok }
+      elsif @picture.zipfile?
+        spawn { @picture.unzip }
+        flash[:notice] = "Your zipfile is being extracted (this will take " +
+          "some time!) - you will see the pictures as they become ready."
+        format.html { redirect_to(pictures_path) }
+        format.xml { head :ok }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }

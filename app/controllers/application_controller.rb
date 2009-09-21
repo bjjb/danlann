@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   filter_parameter_logging :password
 
-  helper_method :current_user, :admin_only
+  helper_method :current_user, :admin_only, :rake
 
 private
 
@@ -32,4 +32,5 @@ private
       redirect_to login_path
     end
   end
+
 end

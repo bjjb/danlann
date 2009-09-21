@@ -22,6 +22,11 @@ class Picture < ActiveRecord::Base
     image_directory 'db/uploaded'
   end
 
+  def image_file=(filename)
+    @image_file = filename
+    super
+  end
+
   def tag_names
     @tag_names || tags.map(&:name)
   end
@@ -37,6 +42,22 @@ class Picture < ActiveRecord::Base
       end
     }
   }
+
+  def zipfile?
+    @image_file && `file #{@image_file.path}` =~ /Zip archive data/
+  end
+
+  # Unzips this "picture" - the picture must be a zipfile.
+  def unzip
+    zipfile = ZipFile.new(@image_file.path, user)
+    zipfile.basename = self.name
+    zipfile.description = self.description
+    zipfile.public = self.public
+    zipfile.tag_names = self.tag_names
+    zipfile.extract
+    zipfile.import
+    zipfile.cleanup
+  end
 
 private
 
