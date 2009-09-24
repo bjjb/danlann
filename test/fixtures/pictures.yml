@@ -47,6 +47,7 @@ spot:
     is. He's very fast.
   image_height: 200
   image_width: 200
+  public: true
   
 scruffy:
   id: 6
@@ -59,6 +60,7 @@ scruffy:
     only because he is very old.
   image_height: 200
   image_width: 200
+  public: true
 
 tabitha: 
   id: 7
@@ -74,6 +76,7 @@ tabitha:
     like Tabitha my cat. LOL LOL LOL.
   image_height: 200
   image_width: 200
+  public: true
 
 cleo: 
   id: 8
@@ -89,6 +92,7 @@ cleo:
     I think she just likes being in the tree.
   image_height: 200
   image_width: 200
+  public: true
 
 tequila: 
   id: 4
@@ -101,6 +105,7 @@ tequila:
     a night.
   image_height: 200
   image_width: 200
+  public: true
 
 eifel_tower: 
   id: 1
@@ -129,6 +134,7 @@ eifel_tower:
     The Tour AXA will be taller still after renovation (225.11
     m, 738.36 ft), but it is not actually within Paris, being in
     the nearby suburb of La Défense.
+  public: true
 
 cockfighting: 
   id: 3
@@ -139,3 +145,4 @@ cockfighting:
   image_width: 200
   description: >
     Some raging roosters a-rumbling...
+  public: false

@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :verify_user, :only => [:edit, :destroy]
-  before_filter :admin_only, :only => :index
+  before_filter :admin_only, :except => [:new, :create]
 
   # GET /users
   # GET /users.xml
@@ -46,7 +45,9 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
-        flash[:notice] = "Thanks for signing up, #{@user.email}"
+        url = account_confirmation_url(@user.perishable_token)
+        Notifier.deliver_account_confirmation(@user, url)
+        flash[:notice] = "A confirmation email has been sent to #{@user.email}"
         format.html { redirect_to(root_path) }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
@@ -88,13 +89,7 @@ class UsersController < ApplicationController
   end
 
 private
-  def verify_user
-    unless current_user
-      redirect_to login_path
-    end
-    unless current_user.administrator? or "#{current_user.id}" == "#{params[:id]}"
-      redirect_to root_path
-    end
+  def admin_only
+    require_user and current_user.administrator?
   end
-
 end

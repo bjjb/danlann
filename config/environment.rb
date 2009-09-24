@@ -13,6 +13,8 @@ Rails::Initializer.run do |config|
               :lib => 'will_paginate',
               :source => 'http://gems.github.com'
   config.gem  'bluecloth'
+  config.gem  'rubyzip', :lib => 'zip/zipfilesystem'
+
 
   # Load your own config/session.yml - which should *not* be checked in!
   if File.exists?(f = File.join(Rails.root, "config", "session.yml"))

@@ -3,9 +3,9 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  filter_parameter_logging :password
 
-  helper_method :current_user, :admin_only, :rake
+  filter_parameter_logging :password, :password_confirmation
+  helper_method :current_user
 
 private
 
@@ -19,18 +19,30 @@ private
     @current_user = current_user_session && current_user_session.record
   end
 
-  def authorize
-    unless current_user_session
-      flash[:message] = "You have to log in first"
-      redirect_to login_url
+  def require_user
+    unless current_user
+      store_location
+      flash[:notice] = "You must be logged in to access this page"
+      redirect_to new_user_session_url
+      return false
     end
   end
 
-  def admin_only
-    unless current_user and current_user.admin?
-      flash[:notice] = "You must be an administrator to do that"
-      redirect_to login_path
+  def require_no_user
+    if current_user
+      store_location
+      flash[:notice] = "You must be logged out to access this page"
+      redirect_to account_url
+      return false
     end
   end
-
+  
+  def store_location
+    session[:return_to] = request.request_uri
+  end
+  
+  def redirect_back_or_default(default)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
+  end
 end

@@ -1,10 +1,13 @@
 class Picture < ActiveRecord::Base
   belongs_to :user
   
-  has_many :taggings, :dependent => :destroy
-  has_many :tags, :through => :taggings
+  has_and_belongs_to_many :tags
   attr_writer :tag_names
   after_save :apply_tags
+
+  def tag_names
+    @tag_names || tags.map(&:name)
+  end
 
   validates_presence_of :user_id
   validates_length_of :name, :within => 2..30
@@ -16,24 +19,17 @@ class Picture < ActiveRecord::Base
   attr_accessor_with_default :group_size, group_size
 
   cattr_accessor :per_page
-  @@per_page = 12
+  @@per_page = 9
 
   acts_as_fleximage do
-    image_directory 'db/uploaded'
-  end
-
-  def image_file=(filename)
-    @image_file = filename
-    super
-  end
-
-  def tag_names
-    @tag_names || tags.map(&:name)
+    image_directory 'db/files'
+    image_storage_format :jpg
   end
 
   named_scope :most_recent, lambda { { :limit => group_size, :order => 'created_at DESC' } }
 
   named_scope :public, { :conditions => { :public => true } }
+
   named_scope :viewable_by, lambda { |user| { :conditions => 
       case user
         when Integer then ['public=? OR user_id=?', true, user]
@@ -44,19 +40,15 @@ class Picture < ActiveRecord::Base
   }
 
   def zipfile?
-    @image_file && `file #{@image_file.path}` =~ /Zip archive data/
+    puts "Hello"
+    debugger
+    puts "OK"
   end
 
-  # Unzips this "picture" - the picture must be a zipfile.
   def unzip
-    zipfile = ZipFile.new(@image_file.path, user)
-    zipfile.basename = self.name
-    zipfile.description = self.description
-    zipfile.public = self.public
-    zipfile.tag_names = self.tag_names
-    zipfile.extract
-    zipfile.import
-    zipfile.cleanup
+  puts "yo"
+    debugger
+    puts "foo"
   end
 
 private

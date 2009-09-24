@@ -21,7 +21,13 @@
       </div>
       <div class='main'>
 
-        <%= render :partial => 'shared/flash' %>
+        <%- unless flash.blank? -%>
+        <div class='flash'>
+          <%- flash.each do |type, message| -%>
+          <p class='<%=h type.to_s %>'><%=h message %></p>
+          <%- end -%>
+        </div>
+        <%- end -%>
 
         <div class='content'>
           <%= yield %>

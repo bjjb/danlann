@@ -3,7 +3,8 @@ class PicturesController < ApplicationController
   cache_sweeper :picture_sweeper, :only => %w(update destroy)
   cache_sweeper :tag_sweeper, :only => %w(create update destroy)
 
-  before_filter :authorize, :except => [:index, :show]
+  before_filter :require_user, :except => [:index, :show]
+  before_filter :check_for_zipfile, :only => :create
 
   # GET /pictures
   def index
@@ -48,12 +49,6 @@ class PicturesController < ApplicationController
         flash[:notice] = "Your picture has been saved"
         format.html { redirect_to(@picture) }
         format.xml  { head :ok }
-      elsif @picture.zipfile?
-        spawn { @picture.unzip }
-        flash[:notice] = "Your zipfile is being extracted (this will take " +
-          "some time!) - you will see the pictures as they become ready."
-        format.html { redirect_to(pictures_path) }
-        format.xml { head :ok }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
@@ -89,35 +84,44 @@ class PicturesController < ApplicationController
   end
 
 private
-  def zipfile?(file)
-    Zip::ZipFile.open(file.path) { |zipfile| }
-    true
-  rescue
-    false
+  def check_for_zipfile
+    if `file #{params[:picture][:image_file].path}`.strip =~ /Zip/
+      return prepare_pictures_from_zipfile
+    else
+      true
+    end
   end
 
-  def extract
-    attrs = params[:picture].clone
-    zipfile = params[:picture].delete(:image_file).path
-    count = 1
-    Zip::ZipFile.foreach(zipfile) do |entry|
-      file = "#{zipfile}-#{entry.name}"
-      entry.extract(file)
-      attrs[:name] = "#{params[:picture][:name]}-#{count}"
-      logger.debug "X [#{zipfile}] #{entry} => #{attrs[:name]}"
-      File.open(file) do |image_file|
-        attrs[:image_file] = image_file
-        picture = current_user.pictures.new(attrs)
-        picture.image_filename = entry.name
-        picture.save!
-      end
-      File.delete(file)
-      count += 1
+  # Unpacks the zipfile, and starts the rake task to import them in the
+  # background. TODO - move this logic into a module, and make cross-platform
+  def prepare_pictures_from_zipfile
+    dir = File.join(
+      Rails.root,
+      Picture.image_directory,
+      Time.now.strftime('%Y/%m/%d')
+    )
+    zipfile = params[:picture][:image_file].path
+    tmpdir = File.join(
+      Rails.root,
+      "tmp/unpacked",
+      File.basename(zipfile)
+    )
+    system "mkdir -p '#{tmpdir}'"
+    system "unzip -jo -d '#{tmpdir}' '#{zipfile}'"
+    File.open("#{tmpdir}/meta.yml", 'w') do |f|
+      meta = params[:picture].clone
+      meta.delete(:image_file)
+      meta.reject! { |k, v| v.blank? }
+      meta.merge!(:user_id => current_user.id)
+      YAML.dump(meta, f)
     end
-    logger.debug "Extracted #{zipfile}"
-    respond_to do |format|
-      format.html { redirect_to pictures_path }
-      format.xml { head :ok }
-    end
+    system "rake import_unpacked RAILS_ENV=#{Rails.env} &"
+    flash[:notice] = "Your images have been unpacked, and will be "   <<
+      "available as soon as they have been imported. Try refreshing " <<
+      "the page in a few minutes."
+    redirect_to pictures_url
+    false # Stop processing
+  rescue Zip::ZipError
+    true # Keep processing
   end
 end

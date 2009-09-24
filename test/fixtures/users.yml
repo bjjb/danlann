@@ -1,15 +1,29 @@
 bill:
-  email: "bill@example.com"
-  crypted_password: ddf76cadc955f1b3fa399b2e1600aecb6a26f9f14940b8f88be130718d7eea920dbf21b4faeb432e4391564c1fbc845d9abad350af7502862142fe2f2105be97 # testtest
-  password_salt: eEbnMz0hHvsFjNORK_cD
-  administrator: true
+  email: bill@example.com
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("secret" + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+  single_access_token: <%= Authlogic::Random.friendly_token %>
+  perishable_token: <%= Authlogic::Random.friendly_token %>
+  active: true
+  confirmed: true
 
 cecil:
   email: cecil@example.com
-  crypted_password: MyString
-  password_salt: MyString
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("secret" + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+  single_access_token: <%= Authlogic::Random.friendly_token %>
+  perishable_token: <%= Authlogic::Random.friendly_token %>
+  active: true
+  confirmed: true
 
-david:
-  email: "david@example.com"
-  crypted_password: MyString 
-  password_salt: MyString
+dave:
+  email: dave@example.com
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("secret" + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+  single_access_token: <%= Authlogic::Random.friendly_token %>
+  perishable_token: <%= Authlogic::Random.friendly_token %>
+  active: true
+  confirmed: true

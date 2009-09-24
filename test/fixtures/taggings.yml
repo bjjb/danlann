@@ -1,63 +1,63 @@
 travel_on_eifel_tower:
   tag: travel
-  picture: eifel_tower
+  taggable: eifel_tower (Picture)
 
 paris_on_eifel_tower:
   tag: paris
-  picture: eifel_tower
+  taggable: eifel_tower (Picture)
 
 travel_on_larc_de_triomphe:
   tag: travel
-  picture: larc_de_triomphe
+  taggable: larc_de_triomphe (Picture)
 
 paris_on_larc_de_triomphe:
   tag: paris
-  picture: larc_de_triomphe
+  taggable: larc_de_triomphe (Picture)
 
 travel_on_cockfighting:
   tag: travel
-  picture: cockfighting
+  taggable: cockfighting (Picture)
 
 mexico_on_cockfighting:
   tag: mexico
-  picture: cockfighting
+  taggable: cockfighting (Picture)
 
 travel_on_tequila:
   tag: travel
-  picture: tequila
+  taggable: tequila (Picture)
 
 mexico_on_tequila:
   tag: mexico
-  picture: tequila
+  taggable: tequila (Picture)
 
 pets_on_spot:
   tag: pets
-  picture: spot
+  taggable: spot (Picture)
 
 dogs_on_spot:
   tag: dogs
-  picture: spot
+  taggable: spot (Picture)
 
 pets_on_scruffy:
   tag: pets
-  picture: scruffy
+  taggable: scruffy (Picture)
 
 dogs_on_scruffy:
   tag: dogs
-  picture: scruffy
+  taggable: scruffy (Picture)
 
 pets_on_tabitha:
   tag: pets
-  picture: tabitha
+  taggable: tabitha (Picture)
 
 cats_on_tabitha:
   tag: cats
-  picture: tabitha
+  taggable: tabitha (Picture)
 
 pets_on_cleo:
   tag: pets
-  picture: cleo
+  taggable: cleo (Picture)
 
 cats_on_cleo:
   tag: cats
-  picture: cleo
+  taggable: cleo (Picture)

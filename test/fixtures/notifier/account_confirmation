@@ -1,0 +1,21 @@
+Hi,
+
+You are receiving this email because you asked for an account on
+pictures.bjjb.org.
+
+To activate your account, please click the following link:
+
+http://example.com/account_confirmations/<%= users(:bill).perishable_token %>
+
+If the address above does not appear as a link, you should copy it and paste
+it into your browser's address bar.
+
+In the event that you received this email in error, please accept my
+apologies, and simply ignore and delete this email. Your address is never
+stored by pictures.bjjb.org, and you shall not hear from me again.
+
+Otherwise, welcome aboard!
+
+Best,
+
+JJ Buckley

@@ -1,7 +1,0 @@
-<%- unless flash.blank? -%>
-<div class='flash'>
-  <%- flash.each do |type, message| -%>
-  <p class='<%=h type.to_s %>'><%=h message %></p>
-  <%- end -%>
-</div>
-<%- end -%>

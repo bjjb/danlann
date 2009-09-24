@@ -13,3 +13,6 @@ tmp/*
 public/pictures
 public/tags
 public/index.html
+doc/guides
+doc/api
+doc/app

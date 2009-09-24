@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class SigningUpTest < ActionController::IntegrationTest
-  fixtures :all
-
   test "a user signing up for the first time" do
+    User.destroy_all
     get "/users/new"
     assert_response :success
 
