@@ -1,66 +1,130 @@
+eifel_tower: 
+  id : 1
+  user: bill
+  created_at: 2009-01-01 12:00
+  image_filename: eifel_tower.jpg
+  name: The Eifel Tower
+  image_height: 200
+  image_width: 200
+  description: |
+    *The following is taken straight from Wikipedia*
+
+    > Named after its designer, engineer Gustave Eiffel, the
+    > Eiffel Tower is the tallest building in Paris. More than
+    > 200,000,000 people have visited the tower since its
+    > construction in 1889, including 6,719,200 in 2006,
+    > making it the most visited paid monument in the world.
+    > Including the 24 m (79 ft) antenna, the structure is 324 m
+    > (1,063 ft) high (since 2000), which is equivalent to about
+    > 81 levels in a conventional building.
+
+    > At the time of completion in 1889, it was the world's
+    > tallest tower — a title it retained until 1930 when New York
+    > City's Chrysler Building (319 m — 1,047 ft tall) was
+    > completed. The tower is now the fifth-tallest structure
+    > in France and the tallest structure in Paris, with the
+    > second-tallest being the Tour Montparnasse (210 m, 689 ft).
+    > The Tour AXA will be taller still after renovation (225.11
+    > m, 738.36 ft), but it is not actually within Paris, being in
+    > the nearby suburb of La Défense.
+  public: true
+  tags: travel, paris
+
 larc_de_triomphe: 
   id: 2
   user: bill
   created_at: 2009-01-01 11:00
   image_filename: larc_de_triomphe.jpg
   name: The Arc de Triomphe
-  description: >
-    The Arc de Triomphe is a monument in Paris, France that
-    stands in the centre of the Place Charles de Gaulle, also
-    known as the "Place de l'Étoile". It is at the western end
-    of the Champs-Élysées. The triumphal arch honors those who
-    fought for France, particularly during the Napoleonic Wars.
-    On the inside and the top of the arc there are all of the
-    names of generals and wars fought. Underneath is the tomb of
-    the unknown soldier from World War I.
+  description: |
+    *The following is taken straight from wikipedia*
 
-    The Arc is the linchpin of the historic axis (L'Axe
-    historique) — a sequence of monuments and grand
-    thoroughfares on a route which goes from the courtyard of
-    the Louvre Palace to the outskirts of Paris. The monument
-    was designed by Jean Chalgrin in 1806, and its iconographic
-    program pitted heroically nude French youths against bearded
-    Germanic warriors in chain mail and set the tone for public
-    monuments, with triumphant nationalistic messages, until
-    World War I.
+    > The Arc de Triomphe is a monument in Paris, France that
+    > stands in the centre of the Place Charles de Gaulle, also
+    > known as the "Place de l'Étoile". It is at the western end
+    > of the Champs-Élysées. The triumphal arch honors those who
+    > fought for France, particularly during the Napoleonic Wars.
+    > On the inside and the top of the arc there are all of the
+    > names of generals and wars fought. Underneath is the tomb of
+    > the unknown soldier from World War I.
 
-    The monument stands 49.5 m (162 ft) in height, 45 m (150 ft)
-    wide and 22 m (72 ft) deep. The large vault is 29.19 m (95.8
-    ft) high and 14.62 m (48.0 ft) wide. The small vault is
-    18.68 m (61.3 ft) high and 8.44 m (27.7 ft) wide. It is the
-    second largest triumphal arch in existence. Its design
-    was inspired by the Roman Arch of Titus. The Arc de Triomphe
-    is so colossal that three weeks after the Paris victory
-    parade in 1919, marking the end of hostilities in World War
-    I, Charles Godefroy flew his Nieuport biplane through it,
-    with the event captured on newsreel.
+    > The Arc is the linchpin of the historic axis (L'Axe
+    > historique) — a sequence of monuments and grand
+    > thoroughfares on a route which goes from the courtyard of
+    > the Louvre Palace to the outskirts of Paris. The monument
+    > was designed by Jean Chalgrin in 1806, and its iconographic
+    > program pitted heroically nude French youths against bearded
+    > Germanic warriors in chain mail and set the tone for public
+    > monuments, with triumphant nationalistic messages, until
+    > World War I.
+
+    > The monument stands 49.5 m (162 ft) in height, 45 m (150 ft)
+    > wide and 22 m (72 ft) deep. The large vault is 29.19 m (95.8
+    > ft) high and 14.62 m (48.0 ft) wide. The small vault is
+    > 18.68 m (61.3 ft) high and 8.44 m (27.7 ft) wide. It is the
+    > second largest triumphal arch in existence. Its design
+    > was inspired by the Roman Arch of Titus. The Arc de Triomphe
+    > is so colossal that three weeks after the Paris victory
+    > parade in 1919, marking the end of hostilities in World War
+    > I, Charles Godefroy flew his Nieuport biplane through it,
+    > with the event captured on newsreel.
   image_height: 200
   image_width: 200
+  tags: travel, paris
+
+tequila: 
+  id: 4
+  user: david
+  created_at: 2009-02-01 12:00
+  image_filename: tequila.jpg
+  name: Tequila!
+  description: |
+    Some mexican blokes and I slam Tequila in Cancun. Man, what
+    a night.
+  image_height: 200
+  image_width: 200
+  public: true
+  tags: travel, mexico
+
+cockfighting: 
+  id: 3
+  user: cecil
+  image_filename: cockfighting.jpg
+  name: Cockfighting
+  image_height: 200
+  image_width: 200
+  description: |
+    Some raging roosters a-rumbling...
+  public: false
+  tags: travel, mexico
+
 spot: 
   id: 5
   user: david
   created_at: 2009-03-01 12:00
   image_filename: spot.jpg
   name: Spot
-  description: >
+  description: |
     My dog spot is fetching a stick. Look how waggly his tail
     is. He's very fast.
   image_height: 200
   image_width: 200
   public: true
+  tags: pets, dogs
   
 scruffy:
   id: 6
   created_at: 2009-03-01 13:00
   image_filename: scruffy.jpg
   name: Scruffy In Repose
-  description: >
+  description: |
     My dog scruffy is asleep on the carpet in front of the fire.
     He likes to keep warm that way. He is very lazy, but that is
     only because he is very old.
   image_height: 200
   image_width: 200
   public: true
+  tags: pets, dogs
 
 tabitha: 
   id: 7
@@ -70,13 +134,14 @@ tabitha:
   name: Tabitha
   image_height: 200
   image_width: 200
-  description: >
+  description: |
     My cat Tabitha is washing her fur. Sometimes she likes to
     lick herself all over. I wish I could lick myself all over
     like Tabitha my cat. LOL LOL LOL.
   image_height: 200
   image_width: 200
   public: true
+  tags: pets, cats
 
 cleo: 
   id: 8
@@ -84,7 +149,7 @@ cleo:
   created_at: 2009-03-01 15:00
   image_filename: cleo.jpg
   name: Cleo the Cat
-  description: >
+  description: |
     This is my cat Cleo. She is stuck up in a tree. She is very
     good at climbing up trees, but she is not very good at
     coming back down.
@@ -93,56 +158,4 @@ cleo:
   image_height: 200
   image_width: 200
   public: true
-
-tequila: 
-  id: 4
-  user: david
-  created_at: 2009-02-01 12:00
-  image_filename: tequila.jpg
-  name: Tequila!
-  description: >
-    Some mexican blokes and I slam Tequila in Cancun. Man, what
-    a night.
-  image_height: 200
-  image_width: 200
-  public: true
-
-eifel_tower: 
-  id: 1
-  user: bill
-  created_at: 2009-01-01 12:00
-  image_filename: eifel_tower.jpg
-  name: The Eifel Tower
-  image_height: 200
-  image_width: 200
-  description: >
-    Named after its designer, engineer Gustave Eiffel, the
-    Eiffel Tower is the tallest building in Paris. More than
-    200,000,000 people have visited the tower since its
-    construction in 1889, including 6,719,200 in 2006,
-    making it the most visited paid monument in the world.
-    Including the 24 m (79 ft) antenna, the structure is 324 m
-    (1,063 ft) high (since 2000), which is equivalent to about
-    81 levels in a conventional building.
-
-    At the time of completion in 1889, it was the world's
-    tallest tower — a title it retained until 1930 when New York
-    City's Chrysler Building (319 m — 1,047 ft tall) was
-    completed. The tower is now the fifth-tallest structure
-    in France and the tallest structure in Paris, with the
-    second-tallest being the Tour Montparnasse (210 m, 689 ft).
-    The Tour AXA will be taller still after renovation (225.11
-    m, 738.36 ft), but it is not actually within Paris, being in
-    the nearby suburb of La Défense.
-  public: true
-
-cockfighting: 
-  id: 3
-  user: cecil
-  image_filename: cockfighting.jpg
-  name: Cockfighting
-  image_height: 200
-  image_width: 200
-  description: >
-    Some raging roosters a-rumbling...
-  public: false
+  tags: pets, cats

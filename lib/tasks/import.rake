@@ -34,13 +34,21 @@ task :import_unpacked => :environment do
         next unless File.image?(file) # Skip this if it's not an image
         # Come up with the next sequential name for the image
         File.open(file) do |f|
-          attrs = meta.clone
-          attrs['name'] << " (#{index})" unless attrs['name'].blank?
+          attrs = {}
           begin
-            # Get fallback name/description values
-            attrs['name'] ||= f.name
-            attrs['description'] ||= f.description
-            attrs['image_file'] = f # The most important data :)
+            if meta['name'].blank?
+              attrs['name'] = f.name
+            else
+              attrs['name'] = "%s (%d)" % [meta['name'], index]
+            end
+            if meta['description'].blank?
+              attrs['description'] ||= f.description
+            else
+              attrs['description'] = meta['description']
+            end
+            attrs['tag_names'] = meta['tag_names']
+            attrs['user_id'] = meta['user_id']
+            attrs['image_file'] = f
             Picture.create!(attrs)
             index += 1
           rescue

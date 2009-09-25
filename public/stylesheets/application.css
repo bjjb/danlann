@@ -78,6 +78,12 @@ div.content>form {
 form>p.form>label {
   display: block;
 }
+div.flash {
+  text-align: center;
+}
+div.pictures {
+  text-align: center;
+}
 div.content div.picture {
   display: inline;
 }
