@@ -1,7 +1,6 @@
 *.o
 *.so
-vendor/gems/*/ext/Makefile
-vendor/gems/*/ext/mkmf.log
+vendor/gems
 .*.sw?
 db/*.sqlite3
 db/files
