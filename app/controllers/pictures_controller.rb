@@ -114,7 +114,7 @@ private
         :name => name,
         :description => description,
         :tag_names => tag_names,
-        :image_filename => file,
+        :image_filename => File.basename(file),
         :image_width => 0,
         :image_height => 0
       )
@@ -122,13 +122,14 @@ private
       picture
     end
 
-    dir = Picture.image_directory
-    dir << "/#{Time.now.year}"
-    dir << "/#{Time.now.month}"
-    dir << "/#{Time.now.day}"
-    system "mkdir -p #{dir}"
     pictures.each do |picture|
-      File.rename(picture.image_filename, "#{dir}/#{picture.id}.#{format}")
+      t = picture.created_at
+      dir = "#{Picture.image_directory}/#{t.year}/#{t.month}/#{t.day}"
+      system "mkdir -p #{dir}"
+      a = "#{tmpdir}/#{picture.image_filename}"
+      b = "#{dir}/#{picture.id}.#{format}"
+      logger.debug "Renaming #{a} => #{b}"
+      File.rename(a, b)
     end
 
     system "rm -rf #{tmpdir}"

@@ -1,6 +1,5 @@
 *.o
 *.so
-vendor/gems
 .*.sw?
 db/*.sqlite3
 db/files
