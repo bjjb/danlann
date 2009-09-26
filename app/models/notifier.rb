@@ -1,7 +1,7 @@
 class Notifier < ActionMailer::Base
   
   cattr_accessor :mailer
-  mailer = "no-reply@pictures.bjjb.org"
+  mailer = "Notifier <no-reply@pictures.bjjb.org>"
 
   def account_confirmation(user, url)
     subject    'Please confirm your account'

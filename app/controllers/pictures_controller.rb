@@ -86,42 +86,55 @@ class PicturesController < ApplicationController
 private
   def check_for_zipfile
     if `file #{params[:picture][:image_file].path}`.strip =~ /Zip/
-      return prepare_pictures_from_zipfile
+      return import
     else
       true
     end
   end
 
-  # Unpacks the zipfile, and starts the rake task to import them in the
-  # background. TODO - move this logic into a module, and make cross-platform
-  def prepare_pictures_from_zipfile
-    dir = File.join(
-      Rails.root,
-      Picture.image_directory,
-      Time.now.strftime('%Y/%m/%d')
-    )
+  # Unpacks the zipfile, and creates pictures from it.
+  def import
+    tag_names = params[:picture][:tag_names]
+    tmpdir = Dir.mktmpdir(nil, 'tmp')
+    format = Picture.image_storage_format.to_s
     zipfile = params[:picture][:image_file].path
-    tmpdir = File.join(
-      Rails.root,
-      "tmp/unpacked",
-      File.basename(zipfile)
-    )
+
     system "mkdir -p '#{tmpdir}'"
     system "unzip -jo -d '#{tmpdir}' '#{zipfile}'"
-    File.open("#{tmpdir}/meta.yml", 'w') do |f|
-      meta = params[:picture].clone
-      meta.delete(:image_file)
-      meta.reject! { |k, v| v.blank? }
-      meta.merge!(:user_id => current_user.id)
-      YAML.dump(meta, f)
+    files = Dir["#{tmpdir}/*.#{format}"].sort
+
+    pictures = files.map do |file|
+      name = File.basename(file, File.extname(file))
+      description = if File.exists?(txt = "#{tmpdir}/#{name}.txt")
+        File.read(txt)
+      else
+        params[:picture][:description]
+      end
+      picture = Picture.new(
+        :name => name,
+        :description => description,
+        :tag_names => tag_names,
+        :image_filename => file,
+        :image_width => 0,
+        :image_height => 0
+      )
+      picture.save(false) # Skip validation for now
+      picture
     end
-    system "rake import_unpacked RAILS_ENV=#{Rails.env} &"
-    flash[:notice] = "Your images have been unpacked, and will be "   <<
-      "available as soon as they have been imported. Try refreshing " <<
-      "the page in a few minutes."
+
+    dir = Picture.image_directory
+    dir << "/#{Time.now.year}"
+    dir << "/#{Time.now.month}"
+    dir << "/#{Time.now.day}"
+    system "mkdir -p #{dir}"
+    pictures.each do |picture|
+      File.rename(picture.image_filename, "#{dir}/#{picture.id}.#{format}")
+    end
+
+    system "rm -rf #{tmpdir}"
+
+    flash[:notice] = "Your images have been uploaded"
     redirect_to pictures_url
     false # Stop processing
-  rescue Zip::ZipError
-    true # Keep processing
   end
 end
