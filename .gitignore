@@ -14,3 +14,4 @@ public/index.html
 doc/guides
 doc/api
 doc/app
+vendor/gems/*/ext/*
