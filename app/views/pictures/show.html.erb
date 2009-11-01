@@ -2,12 +2,18 @@
 <% div_for @picture do %>
   <%= image_tag picture_path(@picture, :format => :jpg), :class => 'picture' %>
   <% if @picture.user_id == current_user.id %>
-    <div class='operations'>
-      <%= link_to "Edit", edit_picture_path(@picture) %>
-    </div>
+    <ul class='operations'>
+      <li><%= link_to "Edit", edit_picture_path(@picture) %></li>
+      <li><%= link_to "Delete", picture_path(@picture),
+                :method => :delete,
+                :confirm => "Delete this image? This cannot be undone!" %>
+      </li>
+    </ul>
   <% end %>
 <% end %>
-  <%= BlueCloth.new(@picture.description).to_html %>
+
+<%= BlueCloth.new(@picture.description).to_html %>
+
 <ul class='tags'>
   <% @picture.tags.each do |tag| %>
   <li><%= link_to(tag.name, tag) %>

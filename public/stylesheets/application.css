@@ -84,12 +84,24 @@ div.flash {
 div.pictures {
   text-align: center;
 }
-div.content div.picture {
+div.picture {
   display: inline;
 }
 div.content div.picture>img.picture {
   float: left;
-  margin: 0 1em 1em 0;
+}
+div.picture ul.operations {
+  float: left;
+  clear: left;
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+div.picture ul.operations li {
+  display: inline;
+  padding: 0 1em 1em 1em;
+  margin: 0;
 }
 div.content>div.picture>p>img {
   float: right;
