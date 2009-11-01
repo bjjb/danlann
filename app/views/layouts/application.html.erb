@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <%= stylesheet_link_tag 'application', :cache => 'application' %>
-    <%= javascript_include_tag :defaults, :cache => 'application' %>
+    <%= stylesheet_link_tag 'application', :cache => 'styles' %>
+    <%= javascript_include_tag :defaults, :cache => 'scripts' %>
     <title><%= h([yield(:title), 'Dánlann'].compact.join(" » ")) %></title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
@@ -13,8 +13,6 @@
     <div class='page'>
       <div class='header'>
         <h1><%=h yield(:title) %></h1>
-
-<%# render :partial => 'shared/search' %>
 
 <%= render :partial => 'shared/navigation' %>
 
