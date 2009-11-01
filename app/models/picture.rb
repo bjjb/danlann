@@ -6,7 +6,7 @@ class Picture < ActiveRecord::Base
   after_save :apply_tags
 
   def tag_names
-    @tag_names || tags.map(&:name)
+    @tag_names || tags.map(&:name).join(' ')
   end
 
   validates_presence_of :user_id
