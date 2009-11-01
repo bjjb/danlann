@@ -70,7 +70,7 @@ private
 
   def rotate
     unless @rotation.blank? or @rotation.to_i.zero?
-      Magick::ImageList.new(file_path).first.rotate(@rotation.to_i).write(file_path)
+      Magick::Image.read(file_path).first.rotate(@rotation.to_i).write(file_path)
     end
   end
 end
