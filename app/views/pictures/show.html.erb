@@ -1,8 +1,13 @@
 <% title @picture.name %>
 <% div_for @picture do %>
   <%= image_tag picture_path(@picture, :format => :jpg), :class => 'picture' %>
-  <%= BlueCloth.new(@picture.description).to_html %>
+  <% if @picture.user_id == current_user.id %>
+    <div class='operations'>
+      <%= link_to "Edit", edit_picture_path(@picture) %>
+    </div>
+  <% end %>
 <% end %>
+  <%= BlueCloth.new(@picture.description).to_html %>
 <ul class='tags'>
   <% @picture.tags.each do |tag| %>
   <li><%= link_to(tag.name, tag) %>

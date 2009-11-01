@@ -3,10 +3,17 @@ class Picture < ActiveRecord::Base
   
   has_and_belongs_to_many :tags
   attr_writer :tag_names
-  after_save :apply_tags
+  attr_writer :rotation
+  after_save :tag, :rotate
+
+  attr_accessible :name, :description, :tag_names, :rotation
 
   def tag_names
     @tag_names || tags.map(&:name).join(' ')
+  end
+
+  def rotation
+    @rotation || 0
   end
 
   validates_presence_of :user_id
@@ -53,11 +60,17 @@ class Picture < ActiveRecord::Base
 
 private
 
-  def apply_tags
+  def tag
     unless @tag_names.blank?
       self.tags = @tag_names.split(Tag.separator).map do |name|
         Tag.find_or_create_by_name(name)
       end
+    end
+  end
+
+  def rotate
+    unless @rotation.blank? or @rotation.to_i.zero?
+      Magick::ImageList.new(file_path).rotate(@rotation.to_i).write(file_path)
     end
   end
 end
