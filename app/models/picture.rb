@@ -70,7 +70,12 @@ private
 
   def rotate
     unless @rotation.blank? or @rotation.to_i.zero?
-      Magick::Image.read(file_path).first.rotate(@rotation.to_i).write(file_path)
+      logger.debug("Rotating #{self} by #{@rotation}°")
+      image = Magick::Image.read(file_path).first
+      image = image.rotate(@rotation.to_i)
+      image.write(file_path)
     end
+  rescue
+    logger.error("Error rotating #{self}: #{$!.message}")
   end
 end
