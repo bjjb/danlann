@@ -6,8 +6,7 @@
       <li><%= link_to "Edit", edit_picture_path(@picture) %></li>
       <li><%= link_to "Delete", picture_path(@picture),
                 :method => :delete,
-                :confirm => "Delete this image? This cannot be undone!" %>
-      </li>
+                :confirm => "Delete this image? This cannot be undone!" %></li>
     </ul>
   <% end %>
 <% end %>
@@ -16,6 +15,6 @@
 
 <ul class='tags'>
   <% @picture.tags.each do |tag| %>
-  <li><%= link_to(tag.name, tag) %>
+  <li class='tag' id='tag_<%= tag.id %>'><%= link_to(tag.name, tag) %>
   <% end %>
 </ul>
