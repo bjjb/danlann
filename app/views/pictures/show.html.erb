@@ -1,20 +1,13 @@
 <% title @picture.name %>
+
 <% div_for @picture do %>
-  <%= image_tag picture_path(@picture, :format => :jpg), :class => 'picture' %>
-  <% if @picture.user_id == current_user.id %>
-    <ul class='operations'>
-      <li><%= link_to "Edit", edit_picture_path(@picture) %></li>
-      <li><%= link_to "Delete", picture_path(@picture),
-                :method => :delete,
-                :confirm => "Delete this image? This cannot be undone!" %></li>
-    </ul>
+  <%= image_tag medium_picture_path(@picture, :format => :jpg), :class => 'picture', :alt => @picture.name %>
+  <% if current_user and @picture.user_id == current_user.id %>
+  <%= render :partial => 'menu' %>
   <% end %>
 <% end %>
 
 <%= BlueCloth.new(@picture.description).to_html %>
 
-<ul class='tags'>
-  <% @picture.tags.each do |tag| %>
-  <li class='tag' id='tag_<%= tag.id %>'><%= link_to(tag.name, tag) %>
-  <% end %>
-</ul>
+<address>by <%= @picture.user.email %>, last modified <%= time_ago_in_words(@picture.updated_at) %> ago</address>
+<%# render :partial => @picture.tags %>

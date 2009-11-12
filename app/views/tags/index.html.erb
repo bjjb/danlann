@@ -1,9 +1,9 @@
 <% title "Tags" %>
 
-<ul class='tags'>
-  <% linearize(@tags).each do |popularity, tag| %>
-    <% content_tag_for 'li', tag, :class => "popularity#{popularity}" do %>
+<ol class='tags'>
+  <% tag_cloud do |tag, popularity| %>
+    <% content_tag_for 'li', tag, :class => "p#{popularity}" do %>
       <%= link_to tag.name, tag %>
     <% end %>
   <% end %>
-</ul>
+</ol>

@@ -1,10 +1,4 @@
-<% title 'Pictures' %>
-<div class='pictures'>
-  <%= will_paginate(@pictures) %>
-  <%- @pictures.each do |picture| -%>
-  <%= render :partial => picture %>
-  <%- end -%>
-</div>
-<div class='links'>
-  <%= link_to 'Upload a Picture', new_picture_path %>
-</div>
+<%= will_paginate(@pictures) %>
+<ol class='pictures'>
+  <%= render :partial => @pictures %>
+</ol>

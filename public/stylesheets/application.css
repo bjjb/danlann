@@ -1,139 +1,295 @@
 /**
- * Application Stylesheet for Dánlann
+ * Dánlann stylesheet
+ * (c) Bryan JJ Buckley <jj@bjjb.org>
+ * Licenced under the BSD licence
  */
+
+/* Page-wide settings */
 body {
+  margin: 0;
+  padding: 0;
   font-family: sans-serif;
-  background-color: #000;
+  background-color: #111;
+  color: #ccc;
 }
-
+/* Link settings (including image-links) */
 a {
-  color: #aaa;
-  outline: none;
-}
-
-a:hover {
-  color: #fff;
-}
-
-a:active {
   border: none;
   outline: none;
+  text-decoration: none;
+  color: #ccf;
 }
-div.page {
-  color: #eee;
-  background-color: #111;
-  min-width: 800px;
-  width: 80%;
-  margin: auto;
-  border: 3px solid #444;
-  padding: 1em;
+a:hover {
+  color: #eef;
+}
+a:focus {
+  color: #ddf;
+}
+/* Hover effect on image links */
+a:focus>img {
+  opacity: 0.85;
+}
+a:focus>img {
+  opacity: 1.0;
 }
 
-div.header {
-  background-color: #111;
+/* This gives space to elements in which all children are floated */
+div.spacer {
+  clear: both;
+}
+
+/* Main container */
+div.page {
+  margin: auto;
+  width: 80%;
+  min-width: 640px;
+}
+
+/* Flash messages */
+div.flash {
+  margin: 0;
+  padding: 0;
+  opacity: 0.8;
+}
+div.flash>p {
+  margin: 0;
+  font-size: 1.2em;
   padding: 1em;
+  border-bottom: 5px solid;
+  text-align: center;
+}
+div.flash>p.notice {
+  color: #cec;
+  background-color: #252;
+  border-color: #030;
+}
+div.flash>p.warning {
+  color: #eec;
+  background-color: #552;
+  border-color: #330;
+}
+div.flash>p.error {
+  color: #ecc;
+  background-color: #522;
+  border-color: #300;
+}
+
+/* The page title(s) */
+div.banner {
+  width: 100%;
+}
+h1.title {
+  text-align: center;
+  border-bottom: 2px solid white;
+  padding-bottom: 0.5em;
+}
+
+/* The main area of the page */
+div.content {
+}
+
+div.content>div.picture {
+  margin-right: 1em;
+  float: left;
+}
+
+div.content>address {
+  clear: both;
+  text-align: right;
+  font-size: 0.8em;
   margin-bottom: 1em;
 }
-
-div.header>h1 {
-  color: #fff;
-  font-size: 240%;
-  width: 50%;
-}
-
-div.header>ul {
-  padding: 0;
-}
-
-div.header>ul>li>a, div.header>ul>li>a:visited {
-  color: #aaa;
-  font-weight: bold;
-}
-
-div.header>ul>li, ul.tags>li {
+/* Menus (on images) */
+ol.menu {
+  background-image: url(/images/menu_bg.png);
+  position: relative;
+  top: -42px;
   list-style: none;
-  padding-right: 2em;
-  display: inline;
-}
-ul.tags {
-  float: right;
-}
-
-ul.navigation {
-  float: right;
-  margin-top: -4em;
-}
-
-form.search {
-  float: right;
-  margin-top: -6.6em;
-}
-div.content {
-  min-height: 500px;
-}
-div.content>form {
-  width: 20em;
-  margin: auto;
-}
-form>p.form>label {
-  display: block;
-}
-div.flash {
-  text-align: center;
-}
-div.pictures {
-  text-align: center;
-}
-div.picture {
-  display: inline;
-}
-div.content div.picture>img.picture {
-  float: left;
-}
-div.picture ul.operations {
-  float: left;
-  clear: left;
-  list-style: none;
-  text-align: center;
-  margin: 0;
+  margin: 0 0 -42px 0;
   padding: 0;
-}
-div.picture ul.operations li {
-  display: inline;
-  padding: 0 1em 1em 1em;
-  margin: 0;
-}
-div.content>div.picture>p>img {
-  float: right;
-  margin: 1em 0 1em 1em;
-}
-div.content>div.links {
   text-align: center;
 }
-div.content>div.links>a {
-  margin: 3em;
+ol.menu li {
+  display: inline;
 }
-
-a, a>img {
-  text-decoration: none;
+ol.menu li a img {
+  opacity: 0.8;
   border: none;
 }
-
-input, textarea {
+ol.menu li a:hover img {
+  opacity: 1.0;
+}
+/* Pictures index - shows a list of thumbnails with pagination */
+ol.pictures {
+  list-style: none;
+  margin: auto;
+  text-align: center; /* thumbnails should be centered */
+}
+ol.pictures>li {
+  margin: 0;
+  padding: 0;
+  width: 200px; /* thumbnails are no bigger than 200×200 */
+  height: 200px;
+  display: inline; /* they're displayed next to one-another */
+}
+ol.pictures>li>a {
+  /* these are to ensure that the alt-text looks ok (centered, etc) */
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  width: 200px;
+  height: 200px;
+  color: #fff;
+  margin: auto;
+/*  display: table-cell; */
+  vertical-align: middle;
+  text-align: center;
+}
+ol.pictures>li.picture>a>img {
+  border: none;
+  outline: none;
+  margin: 1em;
+  font-size: 0.8em;
+  font-style: italic;
+  max-height: 200px;
+  max-width: 200px;
+  opacity: 0.8; /* for a rollover effect */
+}
+ol.pictures>li.picture>a:hover>img {
+  opacity: 1.0; /* for a rollover effect */
+}
+div.pagination {
+  text-align: center;
+}
+div.pagination>a {
+  text-align: center;
+}
+/* Tags */
+ol.tags {
+  padding-top: 1em;
+  list-style: none;
+  text-align: center;
+  padding-bottom: 1em;
+}
+ol.tags li.tag {
+  display: inline;
+  margin: 1em;
+}
+ol.tags li.tag.p1 { font-size: 80%; }
+ol.tags li.tag.p2 { font-size: 90%; }
+ol.tags li.tag.p3 { font-size: 100%; }
+ol.tags li.tag.p4 { font-size: 110%; }
+ol.tags li.tag.p5 { font-size: 120%; }
+/* Forms */
+div.content>form {
+  text-align: center;
+  min-width: 40em;
+  margin: 1em auto 1em auto;
+}
+div.form {
+  width: 40em;
+  margin: auto;
+  clear: both;
+  padding: 1em;
+}
+form div.error {
+  font-weight: bold;
+  font-color: #fcc;
+}
+form div.text_field label,
+form div.password_field label,
+form div.text_area label,
+form div.file_field label,
+form div.check_box div.position {
+  display: inline-block;
+  vertical-align: top;
+  text-align: right;
+  display: inline-block;
+  width: 16em;
+  padding: 0 1em 0 0;
+  margin: 0.5em;
+}
+form div.text_field input,
+form div.password_field input,
+form div.text_area textarea,
+form div.file_field input,
+form div.check_box label {
+  text-align: left;
+  display: inline-block;
   font-family: sans-serif;
-  font-size: 100%;
-  border: 1px solid #444;
-  background-color: #ddd;
+  font-size: 1em;
+  padding: 0.5em;
+  border: 0;
+  width: 16em;
+  border: none;
 }
-input[type=text], textarea {
-  width: 20em;
+form div.check_box input {
+  padding: 0.5em;
+  margin: 0;
 }
-input:hover, textarea:hover {
-  background-color: #eee;
+form div.submit input {
+  border: 0;
+  font-size: 1em;
+  padding: 0.5em;
 }
-input:focus, textarea:focus {
+form span.error_message {
+  font-size: 0.8em;
+  font-style: bold;
+  color: #fcc;
+  text-align: left;
+  display: block;
+  margin-left: 0.6em;
+  padding-left: 50%;
+}
+
+form ol.links {
+  list-style: none;
+  padding: 0;
+}
+
+form ol.links li {
+  display: inline;
+  padding: 0 1em 0 1em;
+}
+form.edit_picture img {
+  position: relative;
+  top: -64px;
+}
+/* Footer */
+div.footer {
+   text-align: center;
+}
+
+/* Navigation list - sits in the footer */
+div.footer>ol.navigation {
+  list-style: none;
+  margin: auto;
+  padding: 1em 0 1em 0;
+  border-top: 2px solid white;
+}
+div.footer>ol.navigation>li {
+  display: inline;
+  padding: 0 1em 0 1em;
+}
+div.footer>ol.navigation>li>a {
+}
+
+/* Copyright information in the footer (small) */
+div.footer>p.copyright {
+  font-size: 0.6em;
+}
+
+/* Data tables */
+table {
+  margin: auto;
   background-color: #fff;
+  color: #111;
+  font-size: 90%;
 }
-/*
-* vi:ft=css:tw=79:ts=2:sw=2
-*/
+table thead {
+  background-color: #ccc;
+  text-align: center;
+}
+table thead th, table thead td {
+  padding: 0 0.5em 0 0.5em;
+}

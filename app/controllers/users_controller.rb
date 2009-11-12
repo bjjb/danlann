@@ -1,26 +1,10 @@
 class UsersController < ApplicationController
-  before_filter :admin_only, :except => [:new, :create]
-
-  # GET /users
-  # GET /users.xml
-  def index
-    unless current_user and current_user.administrator?
-      redirect_to root_path
-    end
-    @users = User.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
-    end
-  end
-
   # GET /users/1
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @user }
+      format.html
     end
   end
 
@@ -29,14 +13,13 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @user }
+      format.html
     end
   end
 
   # GET /users/1/edit
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -45,51 +28,37 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
-        url = account_confirmation_url(@user.perishable_token)
+        url = confirm_user_url(:id => @user.perishable_token)
         Notifier.deliver_account_confirmation(@user, url)
         flash[:notice] = "A confirmation email has been sent to #{@user.email}"
         format.html { redirect_to(root_path) }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.xml
-  def update
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        flash[:notice] = 'User was successfully updated.'
-        format.html { redirect_to(@user) }
-        format.xml  { head :ok }
+  def confirm
+    @user = User.find_using_perishable_token(params[:id])
+    if @user
+      @user.reset_perishable_token
+      @user.confirmed = true
+      if @user.save
+        flash[:notice] = "Your account has been confirmed - welcome!"
+        UserSession.create(@user)
+        redirect_to root_url
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        flash[:error] = "Something went wrong confirming your account! " +
+          "Please try the signup procedure again. If you continue to " +
+          "encounter difficulties, contact me."
+        redirect_to root_url
       end
+    else
+      flash[:error] = "The confirmation link you provided is not valid. " +
+        "If you copied and pasted it, please double check that the URL is " +
+        "the same as that received in the email. Failing that, try signing " +
+        "up again, or contact me"
+      redirect_to root_url
     end
-  end
-
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  def destroy
-    unless current_user and current_user.id.to_s == params[:id].to_s
-      redirect_to root_path
-    end
-    @user = User.find(params[:id])
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to(root_url) }
-      format.xml  { head :ok }
-    end
-  end
-
-private
-  def admin_only
-    require_user and current_user.administrator?
   end
 end

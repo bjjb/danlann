@@ -1,28 +1,19 @@
-<p>
-  <b>Email:</b>
-  <%=h @user.email %>
-</p>
-
-<p>
-  <b>Crypted password:</b>
-  <%=h @user.crypted_password %>
-</p>
-
-<p>
-  <b>Password salt:</b>
-  <%=h @user.password_salt %>
-</p>
-
-<p>
-  <b>Persistence token:</b>
-  <%=h @user.persistence_token %>
-</p>
-
-<p>
-  <b>Single access token:</b>
-  <%=h @user.single_access_token %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% title @user.email %>
+<dl>
+  <dt>ID</dt>
+  <dd><%=h @user.id %></dd>
+  <dt>Email</dt>
+  <dd><%= mail_to @user.email %></dd>
+  <% unless @user.current_login_at.blank? %>
+  <dt>Current Login</dt>
+  <dd>since <%= time_ago_in_words(@user.current_login_at) %> ago from <%= @user.current_login_ip %></dd>
+  <% end %>
+  <% unless @user.last_login_at.blank? %>
+  <dt>Last Login</dt>
+  <dd><%= time_ago_in_words(@user.last_login_at) %> ago from <%= @user.last_login_ip %>
+  <% end %>
+  <dt>Login Counts</dt>
+  <dd><%=h @user.login_count %> logins, <%=h @user.failed_login_count %> failed attempts</dd>
+  <dt>Activation URL</dt>
+  <dd><%= link_to account_confirmation_url(@user.perishable_token), account_confirmation_url(@user.perishable_token) %></dd>
+</dl>

@@ -1,7 +1,0 @@
-# app/views/pictures/show.png.flexi
-# Accessed via http://mysite.com/pictures/png.png
-@picture.operate do |picture|
-  picture.resize '200x200'
-  picture.polaroid(:caption => @picture.name, :shadow_color => 'rgb(6, 6, 6)')
-end
-# vi:ft=ruby:tw=78:ts=2:sw=2

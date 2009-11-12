@@ -6,12 +6,9 @@ Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
 
   config.gem  'rmagick', :lib => 'RMagick'
-  config.gem  'authlogic'
-  config.gem  'mislav-will_paginate',
-              :lib => 'will_paginate',
-              :source => 'http://gems.github.com'
-  config.gem  'bluecloth'
-
+  config.gem  'authlogic', :version => '>=2.1.3'
+  config.gem  'will_paginate', :version => '>=2.0.3'
+  config.gem  'bluecloth', :version => '>=2.0.5'
 
   # Load your own config/session.yml - which should *not* be checked in!
   if File.exists?(f = File.join(Rails.root, "config", "session.yml"))

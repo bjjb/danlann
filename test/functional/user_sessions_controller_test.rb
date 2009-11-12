@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class UserSessionsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "/login is an alias for /new" do
+    assert_generates '/login', :controller => "user_sessions", :action => "new"
   end
+
+  test "/logout is an alias for /destroy" do
+    assert_generates '/functional', :controller => "user_sessions", :action => "destroy"
+  end
+
 end

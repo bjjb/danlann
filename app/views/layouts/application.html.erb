@@ -5,31 +5,30 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <%= stylesheet_link_tag 'application', :cache => 'styles' %>
     <%= javascript_include_tag :defaults, :cache => 'scripts' %>
-    <title><%= h([yield(:title), 'Dánlann'].compact.join(" » ")) %></title>
+    <title><%= h([yield(:title) || controller.controller_name.humanize, 'Dánlann'].compact.join(" » ")) %></title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
+    <%= yield :head %>
   </head>
   <body>
+    <%- unless flash.blank? -%>
+    <div class='flash'>
+      <%- flash.each do |type, message| -%>
+      <p class='<%=h type.to_s %>'><%=h message %></p>
+      <%- end -%>
+    </div>
+    <%- end -%>
     <div class='page'>
-      <div class='header'>
-        <h1><%=h yield(:title) %></h1>
-
-<%= render :partial => 'shared/navigation' %>
-
+      <div class='banner'>
+        <h1 class='title'><%=h yield(:title) || controller.controller_name.humanize %></h1>
       </div>
-      <div class='main'>
-
-        <%- unless flash.blank? -%>
-        <div class='flash'>
-          <%- flash.each do |type, message| -%>
-          <p class='<%=h type.to_s %>'><%=h message %></p>
-          <%- end -%>
-        </div>
-        <%- end -%>
-
-        <div class='content'>
-          <%= yield %>
-        </div>
+      <div class='content <%= controller.controller_name %>'>
+        <%= yield %>
+      </div>
+      <div class="spacer"></div>
+      <div class='footer'>
+        <%= render :partial => 'shared/navigation' %>
+        <p class='copyright'>Dánlann © Bryan JJ Buckley, all rights reserved</p>
       </div>
     </div>
   </body>

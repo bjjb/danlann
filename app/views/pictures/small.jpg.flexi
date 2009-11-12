@@ -1,0 +1,10 @@
+@picture.operate do |picture|
+  picture.border :size => 5, :color => 'white'
+  picture.shadow  :color => 'black',
+                  :background => 'rgb(16, 16, 16)',
+                  :blur => 8,
+                  :opacity => 0.75,
+                  :offset => '5x5'
+  picture.resize '200x200'
+end
+# vi:ft=ruby:tw=78:ts=2:sw=2

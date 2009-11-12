@@ -1,26 +1,34 @@
 class LabeledFormBuilder < ActionView::Helpers::FormBuilder
-  %w(text_field collection_select text_area password_field file_field).each do |method|
+  %w(
+    text_field
+    collection_select
+    text_area
+    password_field
+    file_field
+  ).each do |method|
     define_method(method) do |field_name, *args|
-      paragraph_tag(method) do
+      div_tag(method) do
         label(field_name, *args) + super(field_name, *args)
       end
     end
   end
 
   def check_box(field_name, *args)
-    paragraph_tag('check_box') do
-      super(field_name, *args) + " " + label(field_name, *args)
+    div_tag('check_box') do
+      div_tag('position') do
+        super(field_name, *args)
+      end + " " + label(field_name, *args)
     end
   end
 
   def submit(*args)
-    paragraph_tag('submit') do
+    div_tag('submit') do
       super(*args)
     end
   end
 
   def check_boxes(name, objects, id_method, name_method, options = {})
-    paragraph_tag('check_boxes') do
+    div_tag('check_boxes') do
       field_name = "#{object_name}[#{name}][]"
       objects.map do |object|
         @template.check_box_tag(
@@ -40,7 +48,7 @@ private
     super(field, options[:label], :class => options[:label_class])
   end
 
-  def paragraph_tag(field_name, &block)
-    @template.content_tag(:p, { :class => "form #{field_name}" }, &block)
+  def div_tag(field_name, &block)
+    @template.content_tag(:div, { :class => "form #{field_name}" }, &block)
   end
 end

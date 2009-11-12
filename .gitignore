@@ -1,6 +1,8 @@
 *.o
+*.core
 *.so
 .*.sw?
+tags
 db/*.sqlite3
 db/files
 log/*.log

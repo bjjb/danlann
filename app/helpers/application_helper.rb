@@ -1,4 +1,6 @@
 module ApplicationHelper
+
+  attr_writer :title
   def title(*args)
     if args.empty?
       h([yield(:title), self.title].compact.join(title_separator))
@@ -7,19 +9,10 @@ module ApplicationHelper
     end
   end
 
-  def title=(page_title, show_title = true)
-    @content_for_title = page_title.to_s
-    @show_title = show_title
-  end
-  
-  def show_title?
-    @show_title
+  def title=(title)
+    content_for(:title) { title }
   end
 
-  def show_user_nav?
-    @show_user_nav != false
-  end
-  
   def stylesheet(*args)
     content_for(:head) { stylesheet_link_tag(*args.map(&:to_s)) }
   end
