@@ -4,3 +4,4 @@
 .*.sw?
 tags
 Capfile
+mkmf.log
