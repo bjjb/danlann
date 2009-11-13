@@ -10,6 +10,7 @@ module TagsHelper
     tags = Tag.all(:include => :pictures)
     tags.reject!(&options[:excluding])
     sizes = tags.map(&options[:weight]).uniq.sort
+    return if sizes.empty?
     min, max = sizes.min, sizes.max
     delta = max - min
     tags.sort_by(&options[:sort]).each do |tag|
