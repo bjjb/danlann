@@ -3,17 +3,4 @@
 *.so
 .*.sw?
 tags
-db/*.sqlite3
-db/files
-log/*.log
 Capfile
-config/database.yml
-config/session.yml
-tmp/*
-public/pictures
-public/tags
-public/index.html
-doc/guides
-doc/api
-doc/app
-vendor/gems/*/ext/*
