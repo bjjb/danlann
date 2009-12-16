@@ -12,13 +12,12 @@
 ActiveRecord::Schema.define(:version => 20090730093224) do
 
   create_table "pictures", :force => true do |t|
-    t.string   "image_filename",                   :null => false
-    t.integer  "image_width",                      :null => false
-    t.integer  "image_height",                     :null => false
-    t.string   "name",                             :null => false
+    t.string   "image_filename"
+    t.integer  "image_width"
+    t.integer  "image_height"
+    t.string   "name"
     t.text     "description"
     t.boolean  "public",         :default => true
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

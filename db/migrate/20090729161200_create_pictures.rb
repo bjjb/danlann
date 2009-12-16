@@ -1,13 +1,12 @@
 class CreatePictures < ActiveRecord::Migration
   def self.up
     create_table :pictures do |t|
-      t.string :image_filename, :null => false
-      t.integer :image_width, :null => false
-      t.integer :image_height, :null => false
-      t.string :name, :null => false
-      t.text :description
+      t.string :image_filename
+      t.integer :image_width
+      t.integer :image_height
+      t.string :name
+      t.text  :description
       t.boolean :public, :default => true
-      t.belongs_to :user
       t.timestamps
     end
   end

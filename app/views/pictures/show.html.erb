@@ -2,12 +2,6 @@
 
 <% div_for @picture do %>
   <%= image_tag medium_picture_path(@picture, :format => :jpg), :class => 'picture', :alt => @picture.name %>
-  <% if current_user and @picture.user_id == current_user.id %>
-  <%= render :partial => 'menu' %>
-  <% end %>
 <% end %>
 
 <%= BlueCloth.new(@picture.description).to_html %>
-
-<address>by <%= @picture.user.email %>, last modified <%= time_ago_in_words(@picture.updated_at) %> ago</address>
-<%# render :partial => @picture.tags %>

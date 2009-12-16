@@ -1,2 +1,0 @@
-module AccountConfirmationsHelper
-end
